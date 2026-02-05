@@ -1,8 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 // ✅ CORRECTED PATH: As you specified
-import { events } from "../data/events"; 
-import Navbar from "../Navbar/Navbar"; 
-import styles from "./Details.module.css"; 
+import { events } from "../data/events";
+import Navbar from "../Navbar/Navbar";
+import styles from "./Details.module.css";
 
 // ✅ CORRECTED PATH: All asset imports now use ../Assets/
 import brainOrange from "../Assets/brain_orange.png";
@@ -12,9 +12,9 @@ import rocket from "../Assets/rocket.png";
 
 const FloatingIcons = () => (
     <>
-        <img src={brainOrange} alt="" className={styles.icon} style={{ width: '60px', top: '20%', right: '7%'}}/>
-        <img src={brainBlue} alt="" className={styles.icon} style={{ width: '50px', top: '15%', left: '5%'}}/>
-        <img src={rocket} alt="" className={styles.icon} style={{ width: '60px', top: '50%', left: '3%'}}/>
+        <img src={brainOrange} alt="" className={styles.icon} style={{ width: '60px', top: '20%', right: '7%' }} />
+        <img src={brainBlue} alt="" className={styles.icon} style={{ width: '50px', top: '15%', left: '5%' }} />
+        <img src={rocket} alt="" className={styles.icon} style={{ width: '60px', top: '50%', left: '3%' }} />
     </>
 );
 
@@ -42,7 +42,7 @@ export default function Details() {
                 </div>
                 <div className={styles['right-panel']}>
                     <h1 className={styles['event-main-title']}>{event.title}</h1>
-                    
+
                     <div className={styles.block}>
                         <h2>Description</h2>
                         <p>{event.description}</p>
@@ -90,13 +90,13 @@ export default function Details() {
                             <p>{event.date} / {event.time}</p>
                         </div>
                     </div>
-                    
+
                     {/* ✅ FIX: Added missing Organizer and Contact section */}
                     <div className={styles.block}>
                         <h2>Contact</h2>
                         <p>
                             <strong>Organizer:</strong> {event.organizer}
-                            <br/>
+                            <br />
                             {event.contacts && event.contacts.map((contact, index) => (
                                 <span key={index}>
                                     <strong>Contact:</strong> {contact.name} - {contact.phone}
@@ -106,7 +106,24 @@ export default function Details() {
                     </div>
 
                     <div className={styles.btn}>
-                        <Link to={event.registrationLink} className={styles['register-btn']}>Register</Link>
+                        {event.registrationLink && event.registrationLink !== "https://forms.gle/register" ? (
+                            <a
+                                href={event.registrationLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles['register-btn']}
+                            >
+                                Register
+                            </a>
+                        ) : (
+                            <button
+                                className={styles['register-btn']}
+                                style={{ opacity: 0.6, cursor: 'not-allowed' }}
+                                disabled
+                            >
+                                No Link Provided
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>
