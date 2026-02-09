@@ -12,14 +12,14 @@ export const leaderboardData = [
         id: "cse",
         tag: "CSE",
         name: "Computer Science & Engineering",
-        points: 80,
+        points: 205,
         img: cse,
     },
     {
         id: "it",
         tag: "IT",
         name: "Information Technology",
-        points: 0,
+        points: 105,
         img: it,
     },
     {
